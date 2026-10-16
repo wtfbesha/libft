@@ -9,10 +9,9 @@
 /*   Updated: 2026/10/12 12:15:12 by mtorfs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int	ft_isdigit(char c)
+int	ft_isdigit(int c)
 {
-	if(char c >= 0 && char c <= 9)
-		return(1);
-	return(0);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }

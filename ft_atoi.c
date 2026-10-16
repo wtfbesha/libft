@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int	result;
 	int	sign;
@@ -25,16 +25,13 @@ int	ft_atoi(char *str)
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-		{
-			sign = sign * -1;
-		}
-	i++;
+			sign *= -1;
+		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = result * 10 + str[i] - '0';
+		result = result * 10 + (str[i] - '0');
 		i++;
 	}
 	return (sign * result);
 }
-
