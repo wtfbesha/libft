@@ -1,47 +1,81 @@
-static size_t	calc_mall(long nb)
-{
-	size_t	c;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtorfs <mtorfs@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/26 18:45:49 by mtorfs          #+#    #+#             */
+/*   Updated: 2026/10/26 18:45:49 by mtorfs          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	c = 0;
-	if (nb < 0)
+#include <stdlib.h>
+
+int	ft_dec(long n)
+{
+	int	i;
+
+	i = 0;
+	if (n <= 0)
 	{
-		c++;
-		nb = -nb;
+		i++;
+		n *= -1;
 	}
-	if (nb == 0)
-		return (1);
-	while (nb > 0)
+	while (n > 0)
 	{
-		nb = nb / 10;
-		c++;
+		n = n / 10;
+		i++;
 	}
-	return (c);
+	return (i);
+}
+
+char	*base(char *str, long int n_, int i)
+{
+	while (n_ > 0)
+	{
+		str[i] = (n_ % 10) + '0';
+		n_ = n_ / 10;
+		i--;
+	}
+	return (str);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*ret;
-	size_t	len;
-	long	nb;
+	char		*str;
+	int			i;
+	long int	n_;
 
-	nb = n;
-	len = calc_mall(nb);
-	ret = malloc(len + 1);
-	if (!ret)
+	n_ = n;
+	i = ft_dec(n_);
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
+	{
 		return (NULL);
-	ret[len] = '\0';
-	ret[0] = '0';
-	if (nb < 0)
-	{
-		ret[0] = '-';
-		nb = -nb;
 	}
-	if (nb == 0)
-		return (ret);
-	while (nb > 0)
+	str[i--] = '\0';
+	if (n_ == 0)
 	{
-		ret[len-- - 1] = nb % 10 + '0';
-		nb = nb / 10;
+		str[0] = '0';
+		return (str);
 	}
-	return (ret);
+	if (n_ < 0)
+	{
+		str[0] = '-';
+		n_ *= -1;
+	}
+	base(str, n_, i);
+	return (str);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+    printf("Base: %s\n", ft_itoa(+1567));
+    printf("Base:10 %s\n", ft_itoa(2324));
+    printf("Base:10 %s\n", ft_itoa(2324));
+    return 0;
+}
+*/

@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtorfs <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mtorfs <mtorfs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/13 18:57:47 by mtorfs            #+#    #+#             */
-/*   Updated: 2026/10/13 18:58:02 by mtorfs           ###   ########.fr       */
+/*   Created: 2026/10/26 18:45:49 by mtorfs          #+#    #+#             */
+/*   Updated: 2026/10/26 18:45:49 by mtorfs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-		return (c - 32);
+		c = c - 32;
 	return (c);
 }
 
+/*#include <stdio.h>
+int main(){
+	char p = 'p';
+	printf("%c", ft_toupper(p));
+}
+*/

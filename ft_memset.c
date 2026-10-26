@@ -3,26 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtorfs <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mtorfs <mtorfs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 14:23:46 by mtorfs            #+#    #+#             */
-/*   Updated: 2026/10/12 14:24:33 by mtorfs           ###   ########.fr       */
+/*   Created: 2026/10/26 18:45:49 by mtorfs          #+#    #+#             */
+/*   Updated: 2026/10/26 18:45:49 by mtorfs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*str;
-	unsigned char	d;
-	size_t			i;
+#include <string.h>
 
-	str = (unsigned char *)b;
-	d = (unsigned char)c;
-	i = 0;
-	while (i < len)
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*p;
+	unsigned char	ch;
+
+	p = s;
+	ch = c;
+	while (n != 0)
 	{
-		str[i] = d;
-		i++;
+		*p++ = ch;
+		n--;
 	}
-	return (b);
+	return (s);
 }
+
+/*
+// #include <string.h>
+// void    *ft_memset(void *s, int c, size_t n)
+// void    *ft_memset(void *s, int c, unsigned int n)
+// ft_memset(s, '7', sizeof(5));
+
+#include<unistd.h>
+void ft_putchar(char c)
+{
+    write(1, &c, 1);
+}
+
+void printArray (char *str, int n) {
+    int i = 0;
+    while (i < n)
+    {
+        ft_putchar(str[i]);
+        i++;
+    }
+    write(1, "\n", 1);
+}
+
+int main () {
+    char s[100] = "Hello world";
+
+    // print array before memset
+    printArray(s, 12);
+
+    //print memset itself
+    ft_memset(s, '7', 5);
+
+    // print same array after memset
+    printArray(s, 12);
+
+   return 0;
+}
+*/

@@ -3,16 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtorfs <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mtorfs <mtorfs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 14:03:38 by mtorfs            #+#    #+#             */
-/*   Updated: 2026/10/12 14:04:00 by mtorfs           ###   ########.fr       */
+/*   Created: 2026/10/26 18:45:49 by mtorfs          #+#    #+#             */
+/*   Updated: 2026/10/26 18:45:49 by mtorfs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+int	ft_isascii(int a)
 {
-	if (c >= 0 && c <= 127)
+	if (a >= 0 && a < 128)
 		return (1);
-	return (0);
+	else
+		return (0);
 }
+
+/*
+#include<unistd.h>
+int main () {
+    int res = ft_isascii('=');
+    if (res == 1)
+    {
+        write(1, "1\n", 2);
+    } else {
+        write(1, "0\n", 2);
+    }
+    return 0;
+}
+*/

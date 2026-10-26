@@ -1,80 +1,150 @@
-static int	count_words(char const *s, char c)
-{
-	int	count;
-	int	in_word;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mtorfs <mtorfs@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/26 18:45:49 by mtorfs          #+#    #+#             */
+/*   Updated: 2026/10/26 18:45:49 by mtorfs          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "libft.h"
+
+int	ft_count_words(char const *str, char delimeter)
+{
+	int	i;
+	int	count;
+
+	i = 0;
 	count = 0;
-	in_word = 0;
-	while (*s)
+	while (str[i])
 	{
-		if (*s != c && !in_word)
+		if (str[i] != delimeter)
 		{
-			in_word = 1;
 			count++;
+			while (str[i] && str[i] != delimeter)
+				i++;
 		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
+		else
+			i++;
 	}
 	return (count);
 }
 
-static char	*word_dup(char const *start, char const *end)
+char	*ft_split_words(char const *str, char delimeter)
 {
-	char	*word;
-	size_t	len;
-	size_t	i;
+	char		*new;
+	int			len;
+	int			i;
 
-	len = end - start;
-	word = (char *)malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
 	i = 0;
+	len = 0;
+	while (str[len] && str[len] != delimeter)
+		len++;
+	new = malloc(sizeof(char) * (len + 1));
+	if (!new)
+		return (NULL);
 	while (i < len)
 	{
-		word[i] = start[i];
+		new[i] = str[i];
 		i++;
 	}
-	word[i] = '\0';
-	return (word);
+	new[i] = '\0';
+	return (new);
 }
 
-static void	free_all(char **result, int i)
+static	void	free_split(char **arr, int j)
 {
-	while (i >= 0)
-		free(result[i--]);
-	free(result);
+	while (j > 0)
+		free(arr[--j]);
+	free(arr);
+}
+
+static int	fill_split(char **arr, char const *s, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			arr[j] = ft_split_words(&s[i], c);
+			if (!arr[j])
+				return (free_split(arr, j), 0);
+			while (s[i] && s[i] != c)
+				i++;
+			j++;
+		}
+		else
+			i++;
+	}
+	arr[j] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		i;
-	char	*start;
+	char	**arr_new_str;
 
 	if (!s)
 		return (NULL);
-	result = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
-	if (!result)
+	arr_new_str = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	if (!arr_new_str)
 		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		while (*s == c)
-			s++;
-		if (!*s)
-			break ;
-		start = (char *)s;
-		while (*s && *s != c)
-			s++;
-		result[i] = word_dup(start, s);
-		if (!result[i])
-		{
-			free_all(result, i - 1);
-			return (NULL);
-		}
-		i++;
-	}
-	result[i] = NULL;
-	return (result);
+	if (!fill_split(arr_new_str, s, c))
+		return (NULL);
+	return (arr_new_str);
 }
+/*
+#include <stdio.h>
+void test_split(char *str, char delimiter)
+{
+		char **result;
+		int i;
+
+		i = 0;
+		printf("\nInput: \"%s\" | Delimiter: '%c'\n",
+			   str, delimiter);
+		printf("Result:\n");
+
+		result = ft_split(str, delimiter);
+		if (!result)
+		{
+				printf("Allocation failed\n");
+				return;
+		}
+		while (result[i])
+		{
+				printf("[%d]: \"%s\"\n", i, result[i]);
+				free(result[i]);
+				i++;
+		}
+		printf("Number of words: %d\n", i);
+		free(result);
+}
+
+int main(void)
+{
+		//     test_split("ERIC THE ONE", 'E');
+		//     test_split("hello world", ' ');
+		//     test_split("hello", 'o');
+		//     test_split("hello", 'x');
+		//     test_split("", ' ');
+		//     test_split("     ", ' ');
+		//     test_split("  hello  world  ", ' ');
+		//     test_split("hello,,world,,,42", ',');
+		//     test_split(",,,hello,,,world,,,", ',');
+		//     test_split("hello", '\0');
+		//     test_split("aaaaa", 'a');
+		//     test_split("42 School 1337", ' ');
+
+		test_split("he l*lo", ' ');
+		test_split("a*b*cde", '*');
+		return (0);
+}
+*/

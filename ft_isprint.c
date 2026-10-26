@@ -3,16 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtorfs <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mtorfs <mtorfs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 14:05:50 by mtorfs            #+#    #+#             */
-/*   Updated: 2026/10/12 14:06:10 by mtorfs           ###   ########.fr       */
+/*   Created: 2026/10/26 18:45:49 by mtorfs          #+#    #+#             */
+/*   Updated: 2026/10/26 18:45:49 by mtorfs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+int	ft_isprint(int a)
 {
-	if (c >= 32 && c <= 126)
+	if (a >= 32 && a < 127)
 		return (1);
-	return (0);
+	else
+		return (0);
 }
+
+/*
+#include<unistd.h>
+int main () {
+    int res = ft_isprint('\t');
+    if (res == 1)
+    {
+        write(1, "1\n", 2);
+    } else {
+        write(1, "0\n", 2);
+    }
+    return 0;
+}
+*/

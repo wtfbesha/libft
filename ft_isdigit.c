@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtorfs <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mtorfs <mtorfs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 12:13:54 by mtorfs            #+#    #+#             */
-/*   Updated: 2026/10/12 12:15:12 by mtorfs           ###   ########.fr       */
+/*   Created: 2026/10/26 18:45:49 by mtorfs          #+#    #+#             */
+/*   Updated: 2026/10/26 18:45:49 by mtorfs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
+/*
+#include<unistd.h>
+int main () {
+    int res = ft_isdigit(100);
+    if (res == 1)
+    {
+        write(1, "1\n", 2);
+    } else {
+        write(1, "0\n", 2);
+    }
+    return 0;
+}
+*/
